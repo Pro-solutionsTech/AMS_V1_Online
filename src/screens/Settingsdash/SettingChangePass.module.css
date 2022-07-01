@@ -1,0 +1,73 @@
+.changepasstitle {
+  top: 106px;
+  left: 292px;
+  width: 266px;
+  height: 25px;
+  text-align: left;
+  font: normal normal 600 26px/43px Montserrat;
+  letter-spacing: 0px;
+  color: #001f71;
+  opacity: 1;
+  margin-bottom: 24px;
+}
+
+.changepasscontainer {
+  padding: 24px;
+}
+
+.changepassdesc {
+  top: 156px;
+  left: 292px;
+  width: 868px;
+  height: 53px;
+  text-align: left;
+  font: normal normal 600 18px/28px Montserrat;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin-bottom: 24px;
+}
+
+.passfield {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: 16px;
+}
+
+.forgetpass {
+  margin-top: 544px;
+}
+
+.changePassbutton {
+  margin-top: 54px;
+}
+
+.changePassCancel {
+  padding: 10px 40px;
+  border-radius: 5px;
+  border: 1px solid #001f71;
+  background: #001f71;
+  color: white;
+  background: white;
+  color: #001f71;
+  margin-right: 20px;
+}
+
+.changePassSave {
+  padding: 10px 40px;
+  border-radius: 5px;
+  border: 1px solid #001f71;
+  background: #001f71;
+  color: white;
+  background: #001f71;
+}
+
+.passfield label {
+}
+
+.passfield input {
+  max-width: 300px;
+  border: none;
+  border-bottom: 2px solid #222;
+  margin-top: 16px;
+}

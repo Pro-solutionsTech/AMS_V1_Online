@@ -1,0 +1,98 @@
+.Settings {
+    min-height: 100vh;
+    text-align: center;
+    display: grid;
+    background-color: #282c34;
+    font-family: Montserrat;
+}
+
+.Settings .back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+.Settings .back a {
+    color: white;
+    font-size: 16px;
+}
+.Settings .back a::before {
+    content: "< ";
+}
+
+.SettingsHeader {
+    background-color: #282c34;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 32px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.SettingsLink {
+    color: #61dafb;
+}
+
+.SettingsInputText {
+    width: 350px;
+    padding: 12px;
+    border-radius: 4px;
+    font-family: Montserrat;
+}
+
+.SettingsBody {
+    margin: 0 auto;
+    font-size: 24px;
+    color: white;
+    align-self: center;
+    justify-self: center;
+}
+
+.SettingsField {
+    display: grid;
+    grid-template-columns: 200px auto;
+    align-items: flex-start;
+    text-align: start;
+    margin-bottom: 8px;
+}
+
+.Settings button {
+    margin: 0 auto;
+    margin-top: 24px;
+    padding: 10px 40px;
+    background: #61dafb;
+    color: #202020;
+    font-size: 16px;
+}
+
+
+
+.inAndExportContainer {
+    margin-top: 10px;
+    display:inline-block;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-radius: 4px;
+}
+
+button {
+    border-radius: 4px;
+}
+
+
+.SettingsHeader2 {
+    background-color: #282c34;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 10vh;
+}
+
+
+

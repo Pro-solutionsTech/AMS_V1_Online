@@ -1,0 +1,163 @@
+.CollectionReportPerGradeComponent {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 20px 50px;
+  background: white;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  margin: 36px;
+  margin-top: 35px;
+  border-radius: 20px;
+  font-family: Montserrat;
+}
+
+.CollectionReportPerGradeComponent > h2 {
+  margin-left: 0px;
+}
+
+.CollectionReportPerGradeComponentRow {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.301);
+  align-items: center;
+}
+
+.CollectionReportPerGradeComponentRow:last-child {
+  border-bottom: 0px solid rgba(0, 0, 0, 0.164);
+}
+
+.CollectionReportPerGradeComponentRow h4 {
+  font-weight: bold;
+  margin: 24px;
+  margin-left: 0;
+}
+
+.CollectionReportPerGradeComponentRow p {
+  margin: 24px;
+  margin-left: 0;
+}
+
+.withTwoColumn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.withTwoColumn > div {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+}
+.CollectionReportPerGradeComponentRow input {
+  height: 30px;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.267);
+  width: 200px;
+  padding-left: 8px;
+}
+
+.CollectionReportPerGradeComponentRow > div > div {
+  position: relative;
+}
+
+.CollectionReportPerGradeComponentRow > div > div > img {
+  position: absolute;
+  left: 183px;
+  top: 6px;
+  cursor: pointer;
+  width: 20px;
+}
+
+.withLineInput > div > span {
+  padding-left: 20px;
+  margin-right: 20px;
+}
+
+.withLineInput > div > input {
+  border: none;
+  border-radius: 0;
+  width: 150px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.712);
+}
+
+.withButtons {
+  justify-self: end;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.withButtons button {
+  background: #001f71;
+  color: white;
+  padding: 16px 50px;
+  text-align: center;
+  justify-self: center;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+/* /////Table */
+.perGradeLevelDetailsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px 50px;
+  border-radius: 20px;
+  border: none;
+  background-color: white;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  font-family: Montserrat;
+  margin-top: 25px;
+  margin: 36px;
+  margin-top: 35px;
+  border-radius: 20px;
+}
+
+.perGradeLevelDetailsHeader {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.smartTableTitle {
+  color: #001f71;
+  font-size: 22px;
+}
+
+.smartTable {
+  margin-top: 1px;
+  border-collapse: collapse;
+  flex: 1;
+}
+
+.smartTable .smartTableHeader {
+  margin: 16px;
+  text-align: left;
+}
+
+.smartTableHeader div {
+  font-weight: bolder;
+}
+
+.smartTable .smartTableBody {
+  text-align: left;
+  font-size: 18px;
+}
+
+.smartTableBody tr td {
+  padding: 8px 4px;
+}
+
+.smartTableHeader.smartTableHeaderWithColor tr th {
+  background: #001f71;
+  color: white;
+}
+
+.mainTableData td{
+  font-weight:bold;
+}
+
+.noPadding {
+  padding: 0 !important;
+}

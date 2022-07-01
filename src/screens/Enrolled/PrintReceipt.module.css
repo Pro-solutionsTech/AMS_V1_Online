@@ -1,0 +1,56 @@
+.receiptContainer {
+  width: 8cm;
+  height: 23cm;
+  padding: 10px 10px;
+}
+
+.receiptContent {
+  height: 100%;
+}
+
+.receiptHeader {
+  height: 1.7cm;
+}
+
+.receiptInfo {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.receiptInfoRow {
+  height: 0.9cm;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.receiptInfoRow > p {
+  margin-top: 15px !important;
+  display: flex;
+  /* align-items: flex-end; */
+  white-space: pre-wrap;
+}
+
+.receiptPayment {
+  height: 50%;
+}
+
+.receiptPaymentParticular {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.receiptPaymentParticular > p {
+  margin: 0 !important;
+}
+
+.receiptPaymentParticular > p:last-child {
+  text-align: right;
+}
+
+.receiptFooter {
+  height: 5cm;
+}
+
+.marginTop {
+  margin-top: 20px;
+}

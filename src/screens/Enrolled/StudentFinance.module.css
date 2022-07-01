@@ -1,0 +1,153 @@
+.studentFinancesContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 36px;
+}
+
+.studentFinancesContainer .backButton {
+    align-self: flex-start;
+    font-size: 26px;
+}
+
+.studentFinancesContainer .studentFinancesHeader {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    column-gap: 12px;
+    align-items: center;
+}
+
+.studentFinancesHeader .processPaymentButton {
+    background-color: #001f71;
+    color: white;
+    font-weight: bold;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 32px;
+}
+
+.smartFields {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.smartFields .smartField {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 20px 40px 0;
+    text-align: left;
+}
+
+.smartField .smartFieldLabel {
+    font-size: 14px;
+    color: #828282;
+}
+
+.studentFinancesHeader .popupIcon {
+    position: relative;
+}
+
+.studentFinancesHeader .popupRemarks {
+    position: absolute;
+    top: 50px;
+    max-width: 350px;
+    right: 0px;
+    overflow: scroll;
+    z-index: 99999;
+    background: white;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding: 24px;
+    display: none;
+    max-height: 550px;
+}
+.studentFinancesHeader .popupIcon img {
+    cursor: pointer;
+}
+
+.studentFinancesHeader .popupRemarks::-webkit-scrollbar,
+.studentFinancesHeader .popupOpen .remarksBody::-webkit-scrollbar {
+    display: none;
+}
+
+.studentFinancesHeader .popupOpen {
+    display: grid !important;
+    margin-top: 15px;
+}
+
+.studentFinancesHeader .popupOpen button {
+    justify-self: end;
+    background-color: #001f71;
+    color: white;
+    font-size: 16px;
+    padding: 7px 20px;
+    border-radius: 100px;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.studentFinancesHeader .popupOpen .heading {
+    color: #001f71;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 0px;
+    margin-bottom: 25px;
+}
+
+.studentFinancesHeader .popupOpen .subheading {
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: -9px;
+    margin-bottom: 7px;
+}
+
+.studentFinancesHeader .popupOpen form {
+    display: grid;
+    width: 330px;
+}
+
+.studentFinancesHeader .popupOpen .inputremarks {
+    height: 90px;
+    border: 1px solid #999999;
+    padding: 5px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    width: 320px;
+}
+
+.studentFinancesHeader .popupOpen .heading .bodyDate {
+    font-size: 16px;
+    opacity: 40%;
+    color: #000000;
+}
+
+.studentFinancesHeader .popupOpen .bodyContent {
+    font-size: 16px;
+    color: #000000;
+    overflow-wrap: break-word;
+    margin-bottom: 20px;
+}
+.studentFinancesHeader .popupOpen .remarksBody {
+    overflow: scroll;
+    max-height: 300px;
+}
+
+.studentFinancesHeader .popupOpen .remarksHead {
+    color: #001f71;
+    margin-bottom: -15px;
+}
+
+.studentFinancesTitle {
+    color: #001f71;
+    font-size: 26px;
+}
+
+.toast {
+    background-color: #1876f2 !important;
+}

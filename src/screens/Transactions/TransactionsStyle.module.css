@@ -1,0 +1,45 @@
+.titlehead {
+  margin-left: 36px !important;
+  font-size: 26px;
+  font-weight: 500px;
+}
+
+.containerBtn {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 25px;
+}
+
+.reverseBtn {
+  background-color: #001f71;
+  color: white;
+  font-size: 16px;
+  padding: 10px 30px;
+  border-radius: 100px;
+}
+
+.reversePopup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 999999;
+  position: fixed;
+}
+
+.reversePopup.open {
+  display: grid;
+}
+
+.reversePopupInner {
+  justify-self: center;
+  align-self: center;
+  width: 831px;
+  height: 515px;
+  /* padding: 20px; */
+  background: white;
+  box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.2);
+}

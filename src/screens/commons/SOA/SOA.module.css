@@ -1,0 +1,161 @@
+.enrollmentContainer {
+  align-items: stretch;
+  padding: 16px;
+
+  margin-left: 36px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 30px 200px 1fr 100px;
+  grid-template-areas:
+    "enrhead"
+    "enrSearch"
+    "tblSearch"
+    "enrPagi";
+}
+
+.enrollmentHeader {
+  grid-area: enrhead;
+}
+
+.enrollmentSearch {
+  grid-area: enrSearch;
+  margin-top: -27px;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  grid-column-gap: 8px;
+  column-gap: 50px;
+}
+
+.enrollmentSearch > div {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.enrollmentSearch > div select,
+.enrollmentSearch > div input {
+  margin-right: 12px;
+}
+
+.enrollmentSearch > div input {
+  padding: 10px 0px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-color: #272d3b;
+  padding-left: 20px;
+  font-size: 13px;
+}
+
+.enrollmentSearch > div:last-child {
+  display: grid;
+  justify-items: end;
+  justify-content: end;
+}
+
+.enrollmentSearch > div:first-child {
+  margin-right: 24px;
+}
+
+.clearButton {
+  background-color: #001f71;
+  color: white;
+  font-size: 16px;
+  padding: 10px 30px;
+  border-radius: 100px;
+}
+
+.insideWrapperSearch {
+  width: 350px;
+  position: relative;
+}
+
+.insideWrapperSearch > img {
+  position: absolute;
+  z-index: 9;
+  right: -8px;
+  top: 8px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.enrollmentPagi {
+  grid-area: enrPagi;
+}
+
+.inputBtn {
+  height: 17px;
+  width: 100%;
+  padding: 10px 0px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-color: #272d3b;
+  padding-left: 20px;
+  font-size: 17px;
+}
+
+.searchStudBtn {
+  width: 100%;
+}
+
+.bygradeSel,
+.bysectionSel {
+  height: 40px;
+}
+
+.smartTable {
+  font-size: 16px;
+  border-collapse: collapse;
+  grid-area: tblSearch;
+  margin-top: -50px;
+}
+
+.smartTableHeader {
+  margin: 16px;
+  text-align: left;
+  font-size: 18px;
+  background: #001f71;
+  color: white;
+}
+
+.smartTableBody {
+}
+
+div {
+  /* font-weight: bolder; */
+}
+
+h2 {
+  text-align: start;
+  color: #001f71;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+tr {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+th {
+  padding: 10px;
+}
+
+.smartTableItemContainer {
+  flex: 1;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 16px;
+  text-align: left;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.borderBottom td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+  padding: 5px 10px;
+  padding-top: 10px;
+}

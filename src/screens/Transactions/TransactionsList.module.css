@@ -1,0 +1,95 @@
+.transactionsListContainer {
+  align-items: stretch;
+  padding: 16px;
+
+  margin-left: 36px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px 100px 1fr 100px;
+  grid-template-areas:
+    "enrhead"
+    "enrSearch"
+    "tblSearch"
+    "enrPagi";
+}
+
+.transactionsListHeader {
+  grid-area: enrhead;
+}
+
+.transactionsListSearch {
+  margin-top: -27px;
+}
+
+.searchNote {
+  margin-top: 5px;
+  opacity: 0.85;
+}
+
+.insideWrapperSearch {
+  width: 350px;
+  position: relative;
+}
+
+.insideWrapperSearch > img {
+  position: absolute;
+  z-index: 9;
+  right: -8px;
+  top: 8px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.transactionsListPagination {
+  grid-area: enrPagi;
+}
+
+.inputBtn {
+  height: 17px;
+  width: 100%;
+  padding: 10px 0px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-color: #272d3b;
+  padding-left: 20px;
+  font-size: 17px;
+}
+
+.searchTransactionBtn {
+  width: 100%;
+}
+
+.smartTable {
+  font-size: 16px;
+  border-collapse: collapse;
+  grid-area: tblSearch;
+  margin-top: -50px;
+}
+
+.smartTableHeader {
+  margin: 16px;
+  text-align: left;
+  font-size: 18px;
+  background: #001f71;
+  color: white;
+}
+
+h2 {
+  text-align: start;
+  color: #001f71;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+tr {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+th {
+  padding: 10px;
+}

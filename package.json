@@ -1,0 +1,87 @@
+{
+  "name": "ams",
+  "version": "0.1.0",
+  "description": "AMS Display",
+  "author": "lampara",
+  "main": "public/electron.js",
+  "homepage": "./",
+  "build": {
+    "productName": "AMS 32 Bit",
+    "appId": "ph.lamparaschool.ams",
+    "win": {
+      "target": {
+        "target": "nsis",
+        "arch": [
+          "x64"
+        ]
+      },
+      "icon": "build/icon.ico"
+    }
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/node": "^14.14.37",
+    "axios": "^0.21.4",
+    "cross-env": "^7.0.3",
+    "electron-is-dev": "^2.0.0",
+    "knex": "^0.95.4",
+    "moment": "^2.29.1",
+    "node-sass": "^6.0.1",
+    "pbkdf2-sha256": "^1.1.1",
+    "print-js": "^1.6.0",
+    "react": "^17.0.2",
+    "react-data-export": "^0.6.0",
+    "react-detect-offline": "^2.4.4",
+    "react-dom": "^17.0.2",
+    "react-loading": "^2.0.3",
+    "react-moment": "^1.1.1",
+    "react-redux": "^7.2.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-toastify": "^7.0.4",
+    "redux": "^4.0.5",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.0.2",
+    "sweetalert2": "^10.16.7",
+    "typeorm": "^0.2.32",
+    "typescript": "^4.2.3",
+    "web-vitals": "^1.0.1",
+    "xlsx": "^0.17.0"
+  },
+  "scripts": {
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test",
+    "react-eject": "react-scripts eject",
+    "electron-build": "electron-builder",
+    "build": "npm run react-build && npm run electron-build",
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron --experimental-modules .\""
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.0",
+    "concurrently": "^6.0.0",
+    "electron": "^12.2.2",
+    "electron-builder": "^22.10.5",
+    "wait-on": "^5.3.0"
+  }
+}

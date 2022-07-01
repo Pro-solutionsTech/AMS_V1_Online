@@ -1,0 +1,99 @@
+.reversalContainer {
+  display: grid;
+}
+
+.reversalContainer .reversalHeader {
+  background: #001f71;
+  font-size: 22px;
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 831px;
+  height: 65px;
+  place-content: center;
+}
+
+.reversalContainer .reversalTitle {
+  padding: 22px;
+  font-weight: bold;
+}
+
+.reversalContainer .reversalbody {
+  padding: 30px;
+}
+
+.reversalContainer .reversalSubtitle {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.reversalContainer .reversalHeaderBtn {
+  font-size: 22px;
+  color: white;
+  justify-content: flex-end;
+}
+
+.reversalContainer .inputReversal {
+  width: 760px;
+  height: 216px;
+  border: 1px solid #999999;
+  padding: 5px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.267);
+}
+
+.reversalContainer .reversalNote {
+  font-size: 14px;
+  color: #828282;
+  margin-bottom: 40px;
+}
+
+.reversalContainer .reversalfieldContainer label {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.reversalLoginContainer .reversalpassField {
+  margin-top: 15px;
+}
+
+.reversalLoginContainer .reversalintfield {
+  height: 25px;
+  width: 50%;
+  padding: 10px 0px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding-left: 20px;
+  font-size: 18px;
+  margin-top: 7px;
+}
+
+.reversalLoginContainer .reversalLoginBtn {
+  text-align: end;
+  margin-top: 25px;
+}
+
+.reversalSubmit {
+  background-color: #001f71;
+  color: white;
+  font-size: 16px;
+  padding: 10px 30px;
+  border-radius: 100px;
+  width: 130px;
+  height: 36px;
+  display: inline-block;
+}
+
+.reversalCancel {
+  background-color: white;
+  color: #001f71;
+  font-size: 16px;
+  padding: 10px 30px;
+  border-radius: 100px;
+  border: 1px solid #001f71;
+  width: 130px;
+  height: 36px;
+  display: inline-block;
+}

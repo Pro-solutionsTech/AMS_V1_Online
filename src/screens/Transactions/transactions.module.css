@@ -1,0 +1,19 @@
+.titlehead {
+  margin-left: 36px !important;
+  font-size: 26px;
+  font-weight: 500px;
+}
+
+.containerBtn {
+  display: grid;
+  justify-items: self-end;
+  margin-right: 25px;
+}
+
+.reverseBtn {
+  background-color: #001f71;
+  color: white;
+  font-size: 16px;
+  padding: 10px 30px;
+  border-radius: 100px;
+}

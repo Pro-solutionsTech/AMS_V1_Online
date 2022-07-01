@@ -1,0 +1,59 @@
+.transactionDetailsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px 50px 40px;
+  border-radius: 20px;
+  border: none;
+  background-color: white;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  font-family: Montserrat;
+  margin-top: 25px;
+}
+
+.transactionDetailsHeader {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.smartTableTitle {
+  color: #001f71;
+  font-size: 22px;
+}
+
+.smartTable {
+  margin-top: 1px;
+  border-collapse: collapse;
+  flex: 1;
+}
+
+.smartTable .smartTableHeader {
+  margin: 16px;
+  text-align: left;
+}
+
+.smartTableHeader div {
+  font-weight: bolder;
+}
+
+.smartTable .smartTableBody {
+  text-align: left;
+  font-size: 18px;
+}
+
+.smartTableBody tr td {
+  padding: 8px 4px;
+}
+
+.smartTableHeader.smartTableHeaderWithColor tr th {
+  background: #001f71;
+  color: white;
+}
+
+.a:hover {
+  text-decoration: underline;
+}

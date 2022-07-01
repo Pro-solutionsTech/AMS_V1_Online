@@ -1,0 +1,128 @@
+.loginComponent {
+    position: relative;
+    font-family: "Montserrat";
+}
+
+.loginComponentLeftContainer {
+    background: white;
+    width: 40vw;
+    position: absolute;
+    border-top-right-radius: 85px;
+    border-bottom-right-radius: 85px;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.loginComponentLeftContainer .containerWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 0px;
+}
+
+.loginComponentLeftContainer .settings {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    color: #333;
+}
+
+.containerWrapper a {
+    text-decoration: none;
+}
+
+.containerWrapper .logo img {
+    margin-bottom: -120px;
+    width: 320px;
+}
+
+.containerWrapper .heading {
+    font-size: 31px;
+    line-height: 38px;
+    text-align: center;
+    color: #001f71;
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+.containerWrapper .subheading {
+    margin-top: 30px;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #001f71;
+    font-weight: 500;
+}
+
+.containerWrapper .fieldContainer {
+    text-align: start;
+}
+
+.fieldContainer .intfield {
+    height: 25px;
+    width: 100%;
+    padding: 10px 0px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    padding-left: 20px;
+    font-size: 18px;
+}
+
+.fieldContainer label {
+    font-size: 18px;
+    font-weight: 500;
+    color: #828282;
+}
+
+.fieldContainer.passwordField {
+    margin-top: 15px;
+}
+
+.containerWrapper .loginBtn {
+    margin-top: 25px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+.loginBtn button {
+    padding: 12px 60px;
+    background-color: #001f71;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+}
+
+.containerWrapper .forgotPasswordField {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    margin-top: 30px;
+}
+
+.forgotPasswordField a {
+    text-decoration: underline;
+    color: #828282;
+}
+
+.sublinks {
+    color: #001f71;
+    margin-top: 140px;
+    text-align: center;
+}
+
+.sublinks a {
+    color: #001f71;
+}
+
+.sublinks span {
+    padding-left: 20px;
+    padding-right: 20px;
+}

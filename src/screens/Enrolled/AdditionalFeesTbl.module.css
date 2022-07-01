@@ -1,0 +1,73 @@
+.periodDetailsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px 50px 40px;
+  border-radius: 20px;
+  border: none;
+  background-color: white;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  font-family: Montserrat;
+  margin-top: 25px;
+}
+
+.periodDetailsHeader {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.smartTableTitle {
+  color: #001f71;
+  font-size: 22px;
+}
+
+.smartTable {
+  font-size: 18px;
+  margin-top: 1px;
+  border-collapse: collapse;
+  flex: 1;
+}
+
+.smartTable .smartTableHeader {
+  margin: 16px;
+  text-align: left;
+}
+
+.smartTableHeader div {
+  font-weight: bolder;
+}
+
+.smartTableHeaderfordiv {
+  background: #001f71;
+  color: white;
+}
+
+.smartTable .smartTableBody {
+  text-align: left;
+}
+
+.smartTableBody tr td {
+  padding: 8px 4px;
+}
+
+.smartTableHeader.smartTableHeaderWithColor tr th {
+  background: #001f71;
+  color: white;
+  font-size: 18px;
+}
+
+.filterableParticularAmountInput {
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #828282;
+  width: 70px;
+}
+
+.filterableParticularAmountInput:focus {
+  border: none;
+  border-bottom: 2px solid black;
+}

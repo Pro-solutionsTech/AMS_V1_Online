@@ -1,0 +1,31 @@
+.dashboardContainer {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "sidebar navigation"
+        "sidebar container";
+    width: 100%;
+    height: 100vh;
+}
+
+.dashboardContainer .contentContainer {
+    grid-area: container;
+    background: white !important;
+}
+
+.loading {
+    position: fixed;
+    display: block;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, .1);
+    width: 100%;
+    height: 100%;
+}
+
+.loadingContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

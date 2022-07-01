@@ -1,0 +1,72 @@
+.sidebarContainer {
+    grid-area: sidebar;
+    background-color: #001f71;
+    min-width: 250px;
+}
+
+.sidebarContainer .sidebarContainerInner {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+    width: 100%;
+    height: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.sidebarContainerInner .mainLogo {
+    align-self: center;
+    justify-self: center;
+}
+
+.mainLogo img {
+    width: 150px;
+    height: 100%;
+}
+
+.sidebarContainerInner .title {
+    text-align: center;
+    padding: 10px 20px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.sidebarContainerInner .navItem,
+.sidebarContainerInner .navActive {
+    width: 100%;
+}
+
+.navActive .navItemActive {
+    background: white;
+}
+
+.navItem a,
+.navActive a {
+    color: white;
+    text-decoration: none;
+    text-align: start;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 5px auto 1fr;
+    margin-top: 15px;
+    column-gap: 12px;
+}
+
+a .navItemActive {
+    width: 5px;
+    height: 100%;
+    background: none;
+}
+
+a .navItemIcon {
+    width: 15px;
+    color: white;
+    padding: 0px 10px;
+}
+
+a .navItemText {
+    color: white;
+    text-align: start;
+}

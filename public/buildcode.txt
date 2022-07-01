@@ -1,0 +1,15 @@
+"build": {
+    "productName": "AMS 32 Bit",
+    "appId": "ph.lamparaschool.ams",
+    "win": {
+      "target": {
+        "target": "nsis",
+        "arch": [
+          "x64",
+          or
+          "ia32"
+        ]
+      },
+      "icon": "build/icon.ico"
+    }
+  },

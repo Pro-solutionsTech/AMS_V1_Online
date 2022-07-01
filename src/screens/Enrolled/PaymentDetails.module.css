@@ -1,0 +1,167 @@
+.paymentDetailsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px 50px 40px;
+  border-radius: 20px;
+  border: none;
+  background-color: white;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  font-family: Montserrat;
+  /* padding-bottom: 40px; */
+}
+
+.paymentDetailsHeader {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.payablesHeader {
+  flex: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 20px 10px;
+  /* border-radius: 20px;
+  border: none; */
+  background-color: white;
+  /* box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5); */
+  font-family: Montserrat;
+  min-width: 100%;
+}
+
+.smartFieldsDetail {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  column-gap: 16px;
+  min-width: 100%;
+}
+
+.payableSmartField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 40px;
+  text-align: left;
+}
+
+.payableSmartField.payableSmartFieldEnd {
+  align-items: flex-end;
+}
+
+.payableSmartField .smartFieldValue {
+  font-size: 22px;
+  color: black;
+}
+
+.payableSmartField .smartFieldLabel {
+  font-size: 18px;
+  color: #828282;
+}
+
+.payableForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.payableForm .smartTable {
+  margin-top: 24px;
+  flex: 1;
+}
+
+.smartTable {
+  font-size: 18px;
+  border-collapse: collapse;
+  margin-top: -50px;
+}
+
+.smartTable .smartTableHeader {
+  margin: 18px;
+  text-align: left;
+}
+
+.smartTableHeader.smartTableHeaderWithColor tr th {
+  background: #001f71;
+  color: white;
+}
+
+.smartTableHeaderfordiv {
+  background: #001f71;
+  color: white;
+}
+
+.smartTableHeader div {
+  font-weight: bolder;
+}
+
+.smartTable .smartTableBody {
+  text-align: left;
+}
+
+.smartTableBody tr td {
+  padding: 8px 4px;
+}
+
+.filterableParticularAmountInput {
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #828282;
+  width: 100px;
+}
+
+.filterableParticularAmountInput:focus {
+  border: none;
+  border-bottom: 2px solid black;
+}
+.ctaActions {
+  display: grid;
+}
+
+.ctaActionsInner {
+  align-self: end;
+  justify-self: end;
+  display: grid;
+  margin-top: 24px;
+}
+
+.ctaActionsInner > div {
+  display: grid;
+  grid-template-columns: 200px 200px;
+}
+
+.ctaActionsInner input {
+  border: none;
+  border-bottom: 2px solid #222;
+}
+
+.ctaActionsInner h4 {
+  margin: 0;
+  margin-top: 16px;
+}
+
+.ctaActionsInner button {
+  background: #001f71;
+  padding: 10px 40px;
+  border-radius: 40px;
+  color: white;
+  margin-top: 24px;
+  justify-self: flex-end;
+}
+
+.statusPaymentContainer {
+  display: grid;
+  grid-template-columns: 70px 100px;
+  gap: 12px;
+}
+
+.statusPaymentContainer > div:last-child {
+  grid-column: span 2;
+}
+
+.statusPaymentContainer > div:last-child > label {
+  padding-right: 20px;
+}
