@@ -76,7 +76,7 @@ const GetAllTransactionCount = async () => {
        },
     });
     if(response.status === 200){
-      pages = Math.ceil(response.data.count / 100) - 144
+      pages = Math.ceil(response.data.count / 100)
       console.log('pages', pages)
       GetAllTransaction();
     } 
