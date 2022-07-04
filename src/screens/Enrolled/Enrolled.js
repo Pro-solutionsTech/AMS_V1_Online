@@ -15,11 +15,14 @@ import "./Loader.css";
 import styles2 from "./TransactionHistoryModal.module.css";
 import TransactionHistoryModal from "./TransactionHistoryModal";
 import VoucherApprovalModal from "./VoucherApprovalModal";
-import { useSelector } from "react-redux";
+
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
+// import { AuthApiToken, AuthApiUrl } from "../commons/authAPI";
 
 export default function Enrolled({ searchQuery }) {
+
   const [enrollments, setEnrollments] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalEnrolled, setTotalEnrolled] = useState(0);
@@ -32,6 +35,8 @@ export default function Enrolled({ searchQuery }) {
     section: "",
     school_year: "2021-2022"
   });
+
+
   const [activePage, setActivePage] = useState(1);
   const [pageIndex, setPageIndex] = useState({
     startIndex: 0,
@@ -134,8 +139,10 @@ export default function Enrolled({ searchQuery }) {
   };
 
 
+
   //loader
   let loading = true;
+
   enrollments === null && totalEnrolled > 0 ? loading = true : loading = false;
 
   const [openDesign, setOpenDesign] = useState(false);
@@ -149,19 +156,71 @@ export default function Enrolled({ searchQuery }) {
   const settingDatas = useSelector((state) => state.userCredential.state)
   const apiToken = user?.access_token;
   const apiUrl = settingDatas?.apiUrl
+
   //get api token url and other creds -end ()
 
+  const staticAPIURL = "https://sjc-o.sandboxprosolutions.com";
+  const staticAPIToken = "NqRVDFaBeMy7X740ezpmp9U1nLv5B5";
+
+
+  const [enrolledOnline, setEnrolledOnline] = useState([]);
+  const [searchLastName, setSearchLastName] = useState(null);
+  const [filterBy, setFilterBy] = useState('');
+  const [offset, setOffset] = useState(0);
+
+  const offsetLogic = () => {
+    if (offset <= 10) {
+      setOffset(0)
+    }
+    else {
+      setOffset(offset + 10)
+    }
+    return offset
+  }
+  const filterList = [
+    {
+      id: 1,
+      name: `Last Name`,
+      value: `student__last_name`
+    },
+    {
+      id: 2,
+      name: `Middle Name`,
+      value: `student__middle_name`
+    },
+    {
+      id: 3,
+      name: `First Name`,
+      value: `student__first_name`
+    },
+    {
+      id: 4,
+      name: `Student No`,
+      value: `student__student No`
+    },
+
+  ]
+
+
   useEffect(() => {
+
+    const apiCall = () => {
+      if (searchLastName !== null && searchLastName !== '') {
+        return `${staticAPIURL}/api/accounting/enrollments?student__last_name=${searchLastName}&limit=100&offset=${offsetLogic()}`
+      }
+      return `${staticAPIURL}/api/accounting/enrollments?limit=100&offset=${offsetLogic()}`
+    }
     try {
       axios.get(
-        `${apiUrl}/api/accounting/enrollments?limit=10&offset=1`, //reuse get function on create notice api
+        `${apiCall()}`, //reuse get function on create notice api
         {
           headers: {
-            Authorization: `Bearer ${apiToken}`,
+            Authorization: `Bearer ${staticAPIToken}`,
           },
         }
       ).then(e => {
-        console.log(e.data.results)
+        console.log(e)
+        setEnrolledOnline(e.data.results)
       })
     } catch (err) {
       Swal.fire(
@@ -171,8 +230,9 @@ export default function Enrolled({ searchQuery }) {
       );
       console.log(err);
     }
-  }, []);
+  }, [searchLastName]);
 
+  console.log(enrolledOnline)
   return (
     <div className={styles.enrollmentContainer}>
 
@@ -190,8 +250,8 @@ export default function Enrolled({ searchQuery }) {
             name="name"
             placeholder="Search"
             className={`${styles.inputBtn} ${styles.searchstudBtn}`}
-            value={name}
-            onChange={handleChange}
+            // value={searchLastName}
+            onChange={(e) => { setSearchLastName(e.target.value) }}
           />
           <img
             style={{ zIndex: "0" }}
@@ -204,20 +264,18 @@ export default function Enrolled({ searchQuery }) {
           <select
             type="text"
             name="grade"
-            placeholder="Search"
+            placeholder="Filter By"
             className={`${styles.inputBtn} ${styles.bygradeSel}`}
-            value={grade}
-            onChange={handleChange}
+            onChange={(e) => { setFilterBy(e.target.value) }}
           >
-            <option value="" defaultValue>
-              By Grade
+            <option key={0} defaultValue="">
+              {`Filter By`}
             </option>
-            {distinctGrade &&
-              distinctGrade.map((grade) => (
-                <option key={grade} value={grade}>
-                  {grade}
-                </option>
-              ))}
+            {filterList.map((item) => {
+              return (<option key={item.id} value={item.value}>
+                {item.name}
+              </option>)
+            })}
           </select>
         </div>
         <div className={`${styles.insideWrapper}`}>
@@ -300,10 +358,13 @@ export default function Enrolled({ searchQuery }) {
           </tr>
         </thead>
         <tbody className={styles.smartTableBody}>
-          {enrollments && enrollments.length ? (
+          {enrolledOnline && enrolledOnline.length ? (
 
-            enrollments.map((enrollment) => (
-              <EnrollmentTableItem item={enrollment} key={enrollment.id} />
+            enrolledOnline.map((enrollment) => (
+              <EnrollmentTableItem
+                item={enrollment}
+                key={enrollment.id}
+              />
             ))
           ) : (
             <tr>
