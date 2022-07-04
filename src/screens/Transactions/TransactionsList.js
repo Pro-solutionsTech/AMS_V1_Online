@@ -9,6 +9,9 @@ import {
 import Pagination from "../commons/Pagination/Pagination";
 import { useSelector } from "react-redux";
 
+import axios from "axios";
+import Swal from "sweetalert2";
+
 const TransactionsList = ({ }) => {
   const [transactions, setTransactions] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,27 +25,87 @@ const TransactionsList = ({ }) => {
     endIndex: 5,
   });
 
+  const [loadingDone, setLoadingDone] = useState(false)
+  
   const userInitial = selectedUser.initial;
-  useEffect(() => {
-    const cleanup = countTransactions().then((total) => {
-      setTotalTransactions(total);
-      getTransactions(currentPage, transactionsPerPage, userInitial).then(
-        setTransactions
-      );
+  // useEffect(() => {
+  //   const cleanup = countTransactions().then((total) => {
+  //     setTotalTransactions(total);
+  //     getTransactions(currentPage, transactionsPerPage, userInitial).then(
+  //       setTransactions
+  //     );
+  //   });
+  //   return cleanup;
+  // }, []);
+
+ const user = useSelector((state) => state.user);
+ const settingDatas = useSelector((state) => state.userCredential.state)
+ const apiToken = user?.access_token;
+ const apiUrl = settingDatas?.apiUrl
+
+let pages = 0, currPage = 1;
+let offset = 0;
+
+const GetAllTransaction = async () => {
+  let newList = []
+  while (currPage <= pages){
+    console.log('offset', offset)
+    const response = await axios.get(
+      `${apiUrl}/api/accounting/transactions?limit=100&offset=${offset}`, {
+         headers: {
+         Authorization: `Bearer ${apiToken}`,
+         },
+      });
+      if(response.status === 200){
+        newList = [...newList, ...response.data.results]
+        currPage+=1;
+        offset+=100;
+      }
+      
+  }
+  setTransactions(newList)
+  console.log('newList', newList)
+  setLoadingDone(true);
+}
+
+const GetAllTransactionCount = async () => {
+  const response = await axios.get(
+    `${apiUrl}/api/accounting/transactions?limit=1&offset=0`, {
+       headers: {
+       Authorization: `Bearer ${apiToken}`,
+       },
     });
+    if(response.status === 200){
+      pages = Math.ceil(response.data.count / 100)
+      console.log('pages', pages)
+      GetAllTransaction();
+    } 
+}
 
-    return cleanup;
-  }, []);
+const searchTransaction2 = () => {
+  changePage(1);
+  const filteredData = transactions.filter((item) => {
+    const initial = item.ecr_no?.split("-")[1];
+    if (initial === userInitial) {
+      return item;
+    }
+  });
+}
 
-  useEffect(() => {
-    const cleanup = getTransactions(
-      currentPage,
-      transactionsPerPage,
-      userInitial
-    ).then(setTransactions);
+ useEffect(() => {
+  GetAllTransactionCount();
+ },[activePage])
+  
 
-    return cleanup;
-  }, [currentPage]);
+  // useEffect(() => {
+  //   const cleanup = getTransactions(
+  //     currentPage,
+  //     transactionsPerPage,
+  //     userInitial
+  //   ).then(setTransactions);
+
+  //   return cleanup;
+  // }, [currentPage]);
 
   const changePage = (number) => {
     setActivePage(number);
@@ -73,7 +136,7 @@ const TransactionsList = ({ }) => {
     ? (loading = true)
     : (loading = false);
 
-  console.log(transactions)
+  //console.log(transactions)
 
   return (
     <>
@@ -117,9 +180,8 @@ const TransactionsList = ({ }) => {
             </tr>
           </thead>
           <tbody className={styles.smartTableBody}>
-            {transactions && transactions.length ? (
+            {transactions && transactions.length > 0 && transactions !== null? (
               transactions.map((transaction, index) => (
-
                 <TransactionsListTableItem
                   transaction={transaction}
                   key={index}
@@ -146,7 +208,7 @@ const TransactionsList = ({ }) => {
           </div>
         </div>
         <div className={styles.enrollmentPagi}>
-          {transactions && (
+          {(transactions && transactions !== null) && (
             <Pagination
               studentsPerPage={transactionsPerPage}
               totalEnrolled={totalTransactions}

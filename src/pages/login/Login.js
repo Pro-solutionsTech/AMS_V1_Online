@@ -8,8 +8,8 @@ import { getSettings } from '../../repository/SettingsRepository';
 const Login = ({ credentialsState, credentialsDispatch }) => {
   const reduxDispatch = useDispatch()
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("adniog");
+  const [password, setPassword] = useState("auradillo");
   const history = useHistory();
 
   async function handleLogin() {

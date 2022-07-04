@@ -28,18 +28,24 @@ export default function TransactionsListTableItem({ transaction }) {
       </td>
       <td>{transaction.or_no ? transaction.or_no : "NOT SET"}</td>
       <td>{transaction.created_at.split("T")[0]}</td>
-      <td>{transaction.student_no ? transaction.student_no : "N/A"}</td>
+      <td>{transaction.student_payment !== null  ? `${transaction.student_payment.enrollment.student.student_no}` : "N/A"}</td>
       <td>
-        {transaction.last_name
-          ? `${transaction.last_name}, ${transaction.first_name} ${transaction.middle_name}`
+        {console.log('transaction',transaction)}
+        { transaction.student_payment !== null 
+          ? `${transaction.student_payment.enrollment.student.get_full_name}`
           : transaction.receive_from}
       </td>
       <td>{transaction.last_name ? "Student" : "Non Student"}</td>
       <td>
         {transaction.is_reversal
+          ? formatToCurrency(-Math.abs(parseFloat(transaction.amount)))
+          : formatToCurrency(parseFloat(transaction.amount))}
+      </td>
+      {/* <td>
+        {transaction.is_reversal
           ? formatToCurrency(-Math.abs(transaction.amount))
           : formatToCurrency(transaction.amount)}
-      </td>
+      </td> */}
     </tr>
   );
 }
