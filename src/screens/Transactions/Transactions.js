@@ -100,93 +100,117 @@ const Transactions = ({ credentialsState, credentialsDispatch }) => {
     });
   }, []);
 
+  console.log('id',id);
+
+  //const user = useSelector((state) => state.user);
+  const settingDatas = useSelector((state) => state.userCredential.state)
+  const apiToken = user?.access_token;
+  const apiUrl = settingDatas?.apiUrl
+
+  const GetStudentTransaction = async () => {
+    const response = await axios.get(`${apiUrl}/api/accounting/transaction/`, {
+         headers: {
+         Authorization: `Bearer ${apiToken}`,
+         },
+      });
+    if(response.status === 200){
+      console.log('Data', response.data)
+    }else{
+      Swal.fire( "Error",  "Something Went Wrong!", "error" );
+    }
+    console.log('GetStudentEnrollments',response.data)
+  }
+
   useEffect(() => {
-    getOfflineReversalCheck(id).then(setReversal).catch(offlineDatabaseError);
-    getCashAccount().then(setFinanceAccountId);
-    getCashMethod().then(setPaymentMethodId);
-  }, []);
+    GetStudentTransaction();
+  })
 
-  console.log(id);
-  useEffect(async () => {
-    selectOneRequest(id)
-      .then(async (data_request) => {
-        setRequestReversal(data_request);
-        getOfflineTransactionOne(id).then(async (transaction) => {
-          if (transaction.student_payment_id == null) {
-            setOneTransaction(transaction);
-            getOfflineIncomeOne(id)
-              .then(async (income) => {
-                setIncomeTransaction(income);
-              })
-              .catch(offlineDatabaseError);
-          } else {
-            getOfflineTransactions()
-              .then((transactions) => {
-                getOfflineSelectOnePaidParticularsTransac(id).then(
+  // useEffect(() => {
+  //   getOfflineReversalCheck(id).then(setReversal).catch(offlineDatabaseError);
+  //   getCashAccount().then(setFinanceAccountId);
+  //   getCashMethod().then(setPaymentMethodId);
+  // }, []);
 
-                  async (paidParticulars) => {
+  // useEffect(async () => {
+  //   selectOneRequest(id)
+  //     .then(async (data_request) => {
+  //       setRequestReversal(data_request);
+  //       getOfflineTransactionOne(id).then(async (transaction) => {
+  //         if (transaction.student_payment == null) {
+  //           setOneTransaction(transaction);
+  //           getOfflineIncomeOne(id)
+  //             .then(async (income) => {
+  //               setIncomeTransaction(income);
+  //             })
+  //             .catch(offlineDatabaseError);
+  //         } else {
+  //           getOfflineTransactions()
+  //             .then((transactions) => {
+  //               getOfflineSelectOnePaidParticularsTransac(id).then(
 
-                    const transaction = transactions.filter(
-                      (transaction) => transaction.id === id
-                    );
+  //                 async (paidParticulars) => {
 
-                    setTransactions(transaction[0]);
-                    console.log(transaction + "transaction object")
-                    const student_id = await offlineGetColumn(
-                      "student_payments",
-                      "enrollment_id",
-                      "id",
-                      transaction[0].student_payment_id
-                    );
-                    const additionalFees =
-                      await getOfflineAdditionalFeePerTransaction(
-                        student_id,
-                        transaction[0].student_payment_id
-                      );
-                    const libraryLateFee = await getOfflineLateFeeById(
-                      "student_payment",
-                      transaction[0].student_payment_id
-                    );
+  //                   const transaction = transactions.filter(
+  //                     (transaction) => transaction.id === id
+  //                   );
 
-                    setStudentId(student_id);
-                    setAdditionalFee(additionalFees);
-                    setLateFees(libraryLateFee);
+  //                   setTransactions(transaction[0]);
+  //                   console.log(transaction + "transaction object")
+  //                   const student_id = await offlineGetColumn(
+  //                     "student_payments",
+  //                     "enrollment_id",
+  //                     "id",
+  //                     transaction[0].student_payment
+  //                   );
+  //                   const additionalFees =
+  //                     await getOfflineAdditionalFeePerTransaction(
+  //                       student_id,
+  //                       transaction[0].student_payment
+  //                     );
+  //                   const libraryLateFee = await getOfflineLateFeeById(
+  //                     "student_payment",
+  //                     transaction[0].student_payment
+  //                   );
 
-                    // setPaidParticulars(
-                    //   paidParticulars.filter(
-                    //     (paidParticular) =>
-                    //       paidParticular.student_payment_id ===
-                    //       transaction[0].student_payment_id
-                    //   )
-                    // );
-                    getOfflineSelectOnePaidParticularsTransac(id)
-                      .then(setPaidParticulars)
-                      .catch(offlineDatabaseError);
+  //                   setStudentId(student_id);
+  //                   setAdditionalFee(additionalFees);
+  //                   setLateFees(libraryLateFee);
 
-                    getOfflinePaymentPlanItems().then((paymentPlanItems) => {
-                      getOfflinePaymentSchemes().then((paymentSchemes) => {
-                        getOfflineEnrollment(
-                          student_id,
-                          paymentSchemes,
-                          paymentPlanItems
-                        )
-                          .then(setEnrollment)
-                          .catch(offlineDatabaseError);
-                      });
-                    });
-                  }
-                );
-              })
-              .catch(offlineDatabaseError);
+  //                   // setPaidParticulars(
+  //                   //   paidParticulars.filter(
+  //                   //     (paidParticular) =>
+  //                   //       paidParticular.student_payment_id ===
+  //                   //       transaction[0].student_payment_id
+  //                   //   )
+  //                   // );
+  //                   getOfflineSelectOnePaidParticularsTransac(id)
+  //                     .then(setPaidParticulars)
+  //                     .catch(offlineDatabaseError);
 
-            getOfflineParticulars()
-              .then(setParticulars)
-              .catch(offlineDatabaseError);
-          }
-        });
-      })
-      .catch(offlineDatabaseError);
-  }, []);
+  //                   getOfflinePaymentPlanItems().then((paymentPlanItems) => {
+  //                     getOfflinePaymentSchemes().then((paymentSchemes) => {
+  //                       getOfflineEnrollment(
+  //                         student_id,
+  //                         paymentSchemes,
+  //                         paymentPlanItems
+  //                       )
+  //                         .then(setEnrollment)
+  //                         .catch(offlineDatabaseError);
+  //                     });
+  //                   });
+  //                 }
+  //               );
+  //             })
+  //             .catch(offlineDatabaseError);
+
+  //           getOfflineParticulars()
+  //             .then(setParticulars)
+  //             .catch(offlineDatabaseError);
+  //         }
+  //       });
+  //     })
+  //     .catch(offlineDatabaseError);
+  // }, []);
 
   const printReceipt = () => {
     printJS({
