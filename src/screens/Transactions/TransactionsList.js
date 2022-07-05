@@ -43,58 +43,151 @@ const TransactionsList = ({ }) => {
  const apiToken = user?.access_token;
  const apiUrl = settingDatas?.apiUrl
 
-let pages = 0, currPage = 1;
-let offset = 0;
+ //#region TESTING (not used)
+const [nextOffset, setNextOffset] = useState(100);
+const [prevOffset, setPrevOffset] = useState(-100);
 
-const GetAllTransaction = async () => {
-  let newList = []
-  while (currPage <= pages){
-    console.log('offset', offset)
-    const response = await axios.get(
-      `${apiUrl}/api/accounting/transactions?limit=100&offset=${offset}`, {
-         headers: {
-         Authorization: `Bearer ${apiToken}`,
-         },
-      });
-      if(response.status === 200){
-        newList = [...newList, ...response.data.results]
-        currPage+=1;
-        offset+=100;
-      }
-      
-  }
-  setTransactions(newList)
-  console.log('newList', newList)
-  setLoadingDone(true);
-}
-
-const GetAllTransactionCount = async () => {
+const GetTransactionBatch = async (offset, isNext) => {
+  setLoadingDone(false);
+  setTransactions(null);
   const response = await axios.get(
-    `${apiUrl}/api/accounting/transactions?limit=1&offset=0`, {
+    `${apiUrl}/api/accounting/transactions?limit=100&offset=${offset}`, {
        headers: {
        Authorization: `Bearer ${apiToken}`,
        },
     });
     if(response.status === 200){
-      pages = Math.ceil(response.data.count / 100)
-      console.log('pages', pages)
-      GetAllTransaction();
-    } 
+      SetButton(response,null,isNext);
+    }
+    else{
+      Swal.fire( "Error",  "Something Went Wrong!", "error" );
+      setLoadingDone(true);
+    }
 }
 
-const searchTransaction2 = () => {
-  changePage(1);
-  const filteredData = transactions.filter((item) => {
-    const initial = item.ecr_no?.split("-")[1];
-    if (initial === userInitial) {
-      return item;
+const SetButton = (response, transaction, isNext) => {
+  if(response.data.next !== null) {
+    setNextAPICall(response.data.next)
+    if(isNext == true){
+      setPrevOffset(prevState => prevState+100);
+      setNextOffset(prevState => prevState+100);
+      console.log('next')
     }
-  });
+    if(isNext == false){
+      setNextOffset(prevState => prevState-100);
+      setPrevOffset(prevState => prevState-100);
+
+      console.log('prev')
+    }
+  } else {setNextAPICall(null) }
+  if(response.data.previous !== null) {
+    setPrevAPICall(response.data.previous)
+  } else { setPrevAPICall(null) }
+  if(transaction == undefined){
+    setTransactions(response.data.results); }
+  else{
+    setTransactions(transaction); }
+  console.log('nextOffSet',nextOffset)
+  console.log('prevOffSet',prevOffset)
+  setLoadingDone(true);
+}
+
+//#endregion
+
+const GetTransactionSearch = async () => {
+  setLoadingDone(false);
+  setTransactions(null);
+  let searchedQuery = []  
+  const response1 = await axios.get(
+    `${apiUrl}/api/accounting/transactions?limit=100&or_no=${searchQuery}`, {
+       headers: {
+       Authorization: `Bearer ${apiToken}`,
+       },
+    });
+    if(response1.status === 200){
+      searchedQuery = [...searchedQuery,...response1.data.results]
+      SetButton(response1, searchedQuery);
+    }
+    else{
+      Swal.fire( "Error",  "Something Went Wrong!", "error" );
+      setLoadingDone(true);
+    }
+    const response2 = await axios.get(
+      `${apiUrl}/api/accounting/transactions?limit=100&ecr_no=${searchQuery}`, {
+         headers: {
+         Authorization: `Bearer ${apiToken}`,
+         },
+      });
+      if(response2.status === 200){
+        searchedQuery = [...searchedQuery,...response2.data.results]
+        SetButton(response2, searchedQuery);
+      }
+      else{
+        Swal.fire( "Error",  "Something Went Wrong!", "error" );
+        setLoadingDone(true);
+      }
+}
+
+const NextPage = () => {
+  //GetTransactionBatch(nextOffset, true)
+  GetAllTransaction(nextAPICall)
+}
+const PrevPage = () => {
+  //GetTransactionBatch(prevOffset, false)
+  GetAllTransaction(prevAPICall)
+}
+
+const baseAPICall = `${apiUrl}/api/accounting/transactions?limit=100&offset=0`;
+const [nextAPICall, setNextAPICall] = useState(null)
+const [prevAPICall, setPrevAPICall] = useState(null)
+
+const NextPrevBTN = () => {
+  return (
+    <div style={{ textAlign : 'center'}}>
+    { prevAPICall !==null && <div style={{ display : 'inline-block'}}>
+            <button onClick={PrevPage}>
+                  <img src='./img/left-arrow.png' />Previous</button>
+    </div>}
+    { nextAPICall !==null && <div style={{ display : 'inline-block'}}>
+            <button onClick={NextPage}>
+              Next<img src='./img/right-arrow.png'/></button>
+     </div>}
+     </div>
+  )
+}
+
+const GetAllTransaction = async (apiCall) => {
+  setTransactions(null);
+  setLoadingDone(false);
+  const response = await axios.get(
+    `${apiCall}`, {
+       headers: {
+       Authorization: `Bearer ${apiToken}`,
+       },
+    });
+    if(response.status === 200){
+      setTransactions(response.data.results);
+      if(response.data.next !== null) {
+        let next = response.data.next;
+        setNextAPICall(`${next.slice(0,4)}s${next.slice(4)}`)
+      } else {setNextAPICall(null) }
+      if(response.data.previous !== null) {
+        let prev = response.data.previous;
+        setPrevAPICall(`${prev.slice(0,4)}s${prev.slice(4)}`)
+      } else { setPrevAPICall(null) }
+      setLoadingDone(true);
+    } 
+    else{
+      Swal.fire( "Error",  "Something Went Wrong!", "error" );
+      setLoadingDone(true);
+    }
 }
 
  useEffect(() => {
-  GetAllTransactionCount();
- },[activePage])
+  GetAllTransaction(baseAPICall);
+    // GetAllTransaction;
+    // GetTransactionBatch(0);
+ },[])
   
 
   // useEffect(() => {
@@ -112,7 +205,7 @@ const searchTransaction2 = () => {
     setCurrentPage(number);
   };
 
-  const searchTransaction = () => {
+  const searchTransactionOffline = () => {
     changePage(1);
 
     countTransactions(searchQuery).then((total) => {
@@ -128,6 +221,26 @@ const searchTransaction2 = () => {
       });
     });
   };
+
+  //#region  offline search
+  const searchTransaction = () => {
+    changePage(1);
+    
+    countTransactions(searchQuery).then((total) => {
+      setTotalTransactions(total);
+      getTransactionsSearch(1, total, searchQuery, userInitial).then((data) => {
+        const filteredData = data.filter((item) => {
+          const initial = item.ecr_no?.split("-")[1];
+          if (initial === userInitial) {
+            return item;
+          }
+        });
+        setTransactions(filteredData);
+      });
+    });
+  };
+
+  //#endregion
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -159,12 +272,12 @@ const searchTransaction2 = () => {
             <img
               src="./img/icon-search.png"
               alt="school logo"
-              onClick={searchTransaction}
+              onClick={GetTransactionSearch}
             />
           </div>
           <div className={styles.searchNote}>
-            You may search for student name, OR No., ECR No., and Date
-            (YYYY-MM-DD)
+            {/* You may search for student name, OR No., ECR No., and Date */}
+            You may search for OR No., and ECR No.
           </div>
         </div>
         <table className={styles.smartTable}>
@@ -199,7 +312,7 @@ const searchTransaction2 = () => {
           style={{
             marginLeft: "45%",
             marginTop: "15%",
-            display: loading ? "block" : "none",
+            display: !loadingDone ? "block" : "none",
           }}
           className="load_container"
         >
@@ -209,19 +322,24 @@ const searchTransaction2 = () => {
         </div>
         <div className={styles.enrollmentPagi}>
           {(transactions && transactions !== null) && (
-            <Pagination
-              studentsPerPage={transactionsPerPage}
-              totalEnrolled={totalTransactions}
-              changePage={changePage}
-              activePage={activePage}
-              pageIndex={pageIndex}
-              setPageIndex={setPageIndex}
-            />
+            <NextPrevBTN/>
+            // <Pagination
+            //   studentsPerPage={transactionsPerPage}
+            //   totalEnrolled={totalTransactions}
+            //   changePage={changePage}
+            //   activePage={activePage}
+            //   pageIndex={pageIndex}
+            //   setPageIndex={setPageIndex}
+            // />
           )}
         </div>
       </div>
     </>
   );
+  
 };
+
+
+
 
 export default TransactionsList;

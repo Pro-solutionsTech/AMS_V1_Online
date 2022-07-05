@@ -5,6 +5,7 @@ import { formatToCurrency } from "../../repository/base";
 
 export default function TransactionsListTableItem({ transaction }) {
   return (
+    
     <tr
       style={transaction.is_reversal ? { color: "red" } : {}}
       className={`${styles.smartTableItemContainer} ${styles.borderBottom}`}
@@ -12,14 +13,14 @@ export default function TransactionsListTableItem({ transaction }) {
       <td>
         {transaction.receive_from ? (
           <Link
-            to={`/transactions/${transaction.id}`}
+            to={`/transactions/${transaction.ecr_no}`}
             style={transaction.is_reversal ? { color: "red" } : {}}
           >
             {transaction.ecr_no ? transaction.ecr_no : "NOT SET"}
           </Link>
         ) : (
           <Link
-            to={`/transactions/${transaction.id}`}
+            to={`/transactions/${transaction.ecr_no}`}
             style={transaction.is_reversal ? { color: "red" } : {}}
           >
             {transaction.ecr_no ? transaction.ecr_no : "NOT SET"}
@@ -30,12 +31,12 @@ export default function TransactionsListTableItem({ transaction }) {
       <td>{transaction.created_at.split("T")[0]}</td>
       <td>{transaction.student_payment !== null  ? `${transaction.student_payment.enrollment.student.student_no}` : "N/A"}</td>
       <td>
-        {console.log('transaction',transaction)}
         { transaction.student_payment !== null 
           ? `${transaction.student_payment.enrollment.student.get_full_name}`
           : transaction.receive_from}
       </td>
-      <td>{transaction.last_name ? "Student" : "Non Student"}</td>
+      <td>{transaction.student_payment !== null && transaction.student_payment.enrollment.student.get_full_name
+          ? "Student" : "Non Student"}</td>
       <td>
         {transaction.is_reversal
           ? formatToCurrency(-Math.abs(parseFloat(transaction.amount)))

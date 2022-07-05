@@ -64,7 +64,7 @@ const Transactions = ({ credentialsState, credentialsDispatch }) => {
   const { id } = useParams();
   const selectedUser = useSelector((state) => state.user);
   const [enrollment, setEnrollment] = useState(null);
-  const [transaction, setTransactions] = useState(null);
+  const [transaction, setTransaction] = useState(null);
   const [paidParticulars, setPaidParticulars] = useState(null);
   const [particulars, setParticulars] = useState(null);
   const [popupOpen, isPopupOpen] = useState(false);
@@ -100,30 +100,87 @@ const Transactions = ({ credentialsState, credentialsDispatch }) => {
     });
   }, []);
 
-  console.log('id',id);
-
   //const user = useSelector((state) => state.user);
   const settingDatas = useSelector((state) => state.userCredential.state)
   const apiToken = user?.access_token;
   const apiUrl = settingDatas?.apiUrl
 
+  const GetPaymentMethods = async () => {
+    const response = await axios.get(`${apiUrl}/api/accounting/payment-methods`, {
+      headers: {
+      Authorization: `Bearer ${apiToken}`,
+      },
+   });
+    if(response.status === 200){
+      console.log('GetPaymentMethods',response)
+    }else{
+      Swal.fire( "Error",  "Something Went Wrong!", "error" );
+    }
+  }
+
+  const GetParticulars = async () => {
+    const response = await axios.get(`${apiUrl}/api/accounting/particulars`, {
+      headers: {
+      Authorization: `Bearer ${apiToken}`,
+      },
+   });
+    if(response.status === 200){
+      setParticulars(response.data)
+      GetStudentTransaction();
+    }else{
+      Swal.fire( "Error",  "Something Went Wrong!", "error" );
+    }
+  }
+
   const GetStudentTransaction = async () => {
-    const response = await axios.get(`${apiUrl}/api/accounting/transaction/`, {
+    const response = await axios.get(`${apiUrl}/api/accounting/transactions?limit=100&ecr_no=${id}`, {
          headers: {
          Authorization: `Bearer ${apiToken}`,
          },
       });
     if(response.status === 200){
-      console.log('Data', response.data)
+      console.log('Transaction',response.data.results[0])
+      setTransaction(response.data.results[0])
+      GetStudentEnrollment(response.data.results[0].student_payment.enrollment.student.student_no)
     }else{
       Swal.fire( "Error",  "Something Went Wrong!", "error" );
     }
-    console.log('GetStudentEnrollments',response.data)
+  }
+
+  const GetStudentEnrollment = async (studen_no) => {
+    const response = await axios.get(`${apiUrl}/api/accounting/enrollments?limit=1&student__student_no=${studen_no}`, {
+      headers: {
+      Authorization: `Bearer ${apiToken}`,
+      },
+   });
+   if(response.status === 200){
+      console.log('Enrollment',response.data.results[0])
+      setEnrollment(response.data.results[0])
+      setPaidParticulars(response.data.results[0].paid_particulars)
+      GetPaymentScheme(response.data.results[0].payment_scheme_id)
+    }else{
+      Swal.fire( "Error",  "No Student Enrollment Found!", "error" );
+    }
+  }
+
+  const GetPaymentScheme = async (scheme_id) => {
+    const response = await axios.get(`${apiUrl}/api/accounting/payment-scheme/${scheme_id}?limit=1`, {
+      headers: {
+      Authorization: `Bearer ${apiToken}`,
+      },
+   });
+   if(response.status === 200){
+      console.log('GetPaymentScheme',response.data)
+    }else{
+      Swal.fire( "Error",  "No Payment Scheme Found!", "error" );
+    }
   }
 
   useEffect(() => {
-    GetStudentTransaction();
-  })
+    GetParticulars();
+    GetPaymentMethods();
+  },[])
+
 
   // useEffect(() => {
   //   getOfflineReversalCheck(id).then(setReversal).catch(offlineDatabaseError);
@@ -221,6 +278,7 @@ const Transactions = ({ credentialsState, credentialsDispatch }) => {
       style: "*{font-family: Calibri;}",
     });
   };
+
   // for Offline
   // async function handleLoginSubmit(username, password, reason) {
   //   let latestEcr = await getLatestECR(selectedUser.initial);
@@ -731,9 +789,9 @@ const Transactions = ({ credentialsState, credentialsDispatch }) => {
         <PrintReceipt
           idNumber={enrollment.studentNo}
           date={transaction.created_at}
-          studentName={`${enrollment.lastName}, ${enrollment.firstName} ${enrollment.middleName}`}
+          studentName={`${enrollment.student.last_name}, ${enrollment.student.first_name} ${enrollment.student.middle_name}`}
           ecr={transaction.ecr_no}
-          gradeAndSection={`${enrollment.grade} - ${enrollment.section}`}
+          gradeAndSection={`${enrollment.section.curriculum.name} - ${enrollment.section.name}`}
           balance={""}
           particulars={transactionParticulars}
           totalDue={totalDue}

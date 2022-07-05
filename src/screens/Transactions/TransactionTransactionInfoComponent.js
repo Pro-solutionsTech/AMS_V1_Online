@@ -37,7 +37,8 @@ const TransactionTransactionInfoComponent = ({
           <div className={styles.smartField}>
             <div className={styles.smartFieldLabel}>Date</div>
             <div className={styles.smartFieldValue}>
-              {transaction ? transaction.created_at.split("T")[0] : "N/A"}
+              {/* {transaction ? transaction.created_at.split("T")[0] : "N/A"} */}
+              {transaction ? new Date(transaction.created_at).toString() : "N/A"}
             </div>
           </div>
         </div>
